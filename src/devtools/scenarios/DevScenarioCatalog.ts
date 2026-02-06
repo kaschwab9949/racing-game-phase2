@@ -1,0 +1,71 @@
+import type { DevScenarioConfig } from './DevScenarioTypes';
+import { DEFAULT_GRAPHICS_SETTINGS } from '../../game/settings/graphicsTypes';
+
+export const DEV_SCENARIOS: DevScenarioConfig[] = [
+  {
+    id: 'stress_10cars_fx',
+    label: 'Stress: 10 Cars + Heavy FX',
+    description: 'Max particles + high render scale to stress fill rate.',
+    aiCount: 10,
+    graphics: {
+      renderScale: 1.3,
+      shadows: true,
+      skidmarks: true,
+      particles: true,
+      post: true,
+      antialias: 'smooth',
+      cameraShake: true,
+    },
+  },
+  {
+    id: 'stress_10cars_fx_low',
+    label: 'Stress: 10 Cars + Heavy FX (Low AA)',
+    description: 'Same as heavy FX but pixel AA.',
+    aiCount: 10,
+    graphics: {
+      renderScale: 1.2,
+      shadows: true,
+      skidmarks: true,
+      particles: true,
+      post: true,
+      antialias: 'pixel',
+      cameraShake: true,
+    },
+  },
+  {
+    id: 'rain_on',
+    label: 'Rain: On',
+    description: 'Lower grip and higher humidity to mimic wet track.',
+    aiCount: 6,
+    graphics: { ...DEFAULT_GRAPHICS_SETTINGS },
+    weather: 'overcast',
+    trackOverrides: { humidity: 0.9, globalGripMultiplier: 0.85 },
+  },
+  {
+    id: 'rain_off',
+    label: 'Rain: Off',
+    description: 'Reset to clear, normal grip.',
+    aiCount: 6,
+    graphics: { ...DEFAULT_GRAPHICS_SETTINGS },
+    weather: 'clear',
+    trackOverrides: { humidity: 0.35, globalGripMultiplier: 1.0 },
+  },
+  {
+    id: 'dust_on',
+    label: 'Dust: On',
+    description: 'High dust intensity and minor grip loss.',
+    aiCount: 8,
+    graphics: { ...DEFAULT_GRAPHICS_SETTINGS, particles: true },
+    weather: 'dust-storm',
+    trackOverrides: { dustIntensity: 0.8, globalGripMultiplier: 0.92 },
+  },
+  {
+    id: 'dust_off',
+    label: 'Dust: Off',
+    description: 'Clear track with normal grip.',
+    aiCount: 8,
+    graphics: { ...DEFAULT_GRAPHICS_SETTINGS },
+    weather: 'clear',
+    trackOverrides: { dustIntensity: 0, globalGripMultiplier: 1.0 },
+  },
+];
